@@ -9,7 +9,7 @@ describe('Central de Atendimento ao Cliente TAT', function () {
     })
 
     //Exercicio 1 e 2
-    it.only('preenche os campos obrigatórios e envia o formulário', function () {
+    it('preenche os campos obrigatórios e envia o formulário', function () {
         cy.get('#firstName')
             .type('Bruno')
 
@@ -28,9 +28,9 @@ describe('Central de Atendimento ao Cliente TAT', function () {
         cy.get('.success').should('be.visible')
 
     })
-    
+
     //Exercicio 3
-    it.only('exibe mensagem de erro ao submeter o formulário com um email com formatação inválida', function () {
+    it('exibe mensagem de erro ao submeter o formulário com um email com formatação inválida', function () {
         cy.get('#firstName')
             .type('Bruno')
 
@@ -51,7 +51,7 @@ describe('Central de Atendimento ao Cliente TAT', function () {
     })
 
     //Exercicio 4
-    it.only('validar valor vazio após inserir valores não-numericos no campo de telefone', function () {
+    it('validar valor vazio após inserir valores não-numericos no campo de telefone', function () {
         cy.get('#firstName')
             .type('Bruno')
 
@@ -75,8 +75,8 @@ describe('Central de Atendimento ao Cliente TAT', function () {
 
     })
 
-    //Exercicio 5
-    it.only('exibe mensagem de erro quando o telefone se torna obrigatório mas não é preenchido antes do envio do formulário', function () {
+    //Exercicio 4
+    it('exibe mensagem de erro quando o telefone se torna obrigatório mas não é preenchido antes do envio do formulário', function () {
         cy.get('#firstName')
             .type('Bruno')
 
@@ -85,12 +85,12 @@ describe('Central de Atendimento ao Cliente TAT', function () {
 
         cy.get('#email')
             .type('emailteste@teste.com')
-        
+
         cy.get('#phone-checkbox')
             .click()
 
         cy.get('#open-text-area')
-            .type('Lorem ipsum dolor sit amet, ipsum dolor sit amet, ipsum dolor sit amet, ipsum dolor sit amet, ipsum dolor sit amet.', {delay: 0})
+            .type('Lorem ipsum dolor sit amet, ipsum dolor sit amet, ipsum dolor sit amet, ipsum dolor sit amet, ipsum dolor sit amet.', { delay: 0 })
 
         cy.contains('form .button', 'Enviar')
             .click()
@@ -99,17 +99,45 @@ describe('Central de Atendimento ao Cliente TAT', function () {
             .should('be.visible')
     })
 
+    //Exercícios 5
+    it.only('preenche e limpa os campos nome, sobrenome, email e telefone', () => {
+        cy.get('#firstName')
+            .type('Bruno')
+            .should('have.value', 'Bruno')
+            .clear()
+            .should('have.value', '')
+
+        cy.get('#lastName')
+            .type('Gomes')
+            .should('have.value', 'Gomes')
+            .clear()
+            .should('have.value', '')
+
+        cy.get('#email')
+            .type('emailteste@teste.com')
+            .should('have.value', 'emailteste@teste.com')
+            .clear()
+            .should('have.value', '')
+
+        cy.get('#phone')
+            .type('1234567890')
+            .should('have.value', '1234567890')
+            .clear()
+            .should('have.value', '')
+
+    })
+
     //Exercício 6
-    it.only('exibe mensagem de erro ao submeter o formulário sem preencher os campos obrigatórios', function(){
+    it('exibe mensagem de erro ao submeter o formulário sem preencher os campos obrigatórios', function () {
         cy.contains('form .button', 'Enviar')
             .click()
         cy.get('.error')
-            .should('be.visible' )
+            .should('be.visible')
     })
 
-    //Exercício 
-    it('envia o formuário com sucesso usando um comando customizado', () =>{
+    //Exercício 7
+    it('envia o formuário com sucesso usando um comando customizado', () => {
         cy.fillMandatoryFieldsAndSubmit()
-    }) 
+    })
 
 })
