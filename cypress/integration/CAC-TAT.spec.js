@@ -9,7 +9,7 @@ describe('Central de Atendimento ao Cliente TAT', function () {
     })
 
     //Exercicio 1 e 2
-    it('preenche os campos obrigatórios e envia o formulário', function () {
+    it.only('preenche os campos obrigatórios e envia o formulário', function () {
         cy.get('#firstName')
             .type('Bruno')
 
@@ -22,7 +22,7 @@ describe('Central de Atendimento ao Cliente TAT', function () {
         cy.get('#open-text-area')
             .type('Lorem ipsum dolor sit amet, ipsum dolor sit amet, ipsum dolor sit amet, ipsum dolor sit amet, ipsum dolor sit amet.', { delay: 0 })
 
-        cy.get('form .button')
+        cy.contains('form .button', 'Enviar')
             .click()
 
         cy.get('.success').should('be.visible')
@@ -30,7 +30,7 @@ describe('Central de Atendimento ao Cliente TAT', function () {
     })
     
     //Exercicio 3
-    it('exibe mensagem de erro ao submeter o formulário com um email com formatação inválida', function () {
+    it.only('exibe mensagem de erro ao submeter o formulário com um email com formatação inválida', function () {
         cy.get('#firstName')
             .type('Bruno')
 
@@ -43,7 +43,7 @@ describe('Central de Atendimento ao Cliente TAT', function () {
         cy.get('#open-text-area')
             .type('Lorem ipsum dolor sit amet.')
 
-        cy.get('form .button')
+        cy.contains('form .button', 'Enviar')
             .click()
 
         cy.contains('Valide os campos obrigatórios!')
@@ -51,7 +51,7 @@ describe('Central de Atendimento ao Cliente TAT', function () {
     })
 
     //Exercicio 4
-    it('validar valor vazio após inserir valores não-numericos no campo de telefone', function () {
+    it.only('validar valor vazio após inserir valores não-numericos no campo de telefone', function () {
         cy.get('#firstName')
             .type('Bruno')
 
@@ -68,7 +68,7 @@ describe('Central de Atendimento ao Cliente TAT', function () {
         cy.get('#open-text-area')
             .type('Lorem ipsum dolor sit amet.')
 
-        cy.get('form .button')
+        cy.contains('form .button', 'Enviar')
             .click()
 
         cy.contains('Valide os campos obrigatórios!')
@@ -76,7 +76,7 @@ describe('Central de Atendimento ao Cliente TAT', function () {
     })
 
     //Exercicio 5
-    it('exibe mensagem de erro quando o telefone se torna obrigatório mas não é preenchido antes do envio do formulário', function () {
+    it.only('exibe mensagem de erro quando o telefone se torna obrigatório mas não é preenchido antes do envio do formulário', function () {
         cy.get('#firstName')
             .type('Bruno')
 
@@ -92,7 +92,7 @@ describe('Central de Atendimento ao Cliente TAT', function () {
         cy.get('#open-text-area')
             .type('Lorem ipsum dolor sit amet, ipsum dolor sit amet, ipsum dolor sit amet, ipsum dolor sit amet, ipsum dolor sit amet.', {delay: 0})
 
-        cy.get('form .button')
+        cy.contains('form .button', 'Enviar')
             .click()
 
         cy.get('.error')
@@ -100,12 +100,11 @@ describe('Central de Atendimento ao Cliente TAT', function () {
     })
 
     //Exercício 6
-    it('exibe mensagem de erro ao submeter o formulário sem preencher os campos obrigatórios', function(){
-        cy.get('form .button')
-        .click()
-
+    it.only('exibe mensagem de erro ao submeter o formulário sem preencher os campos obrigatórios', function(){
+        cy.contains('form .button', 'Enviar')
+            .click()
         cy.get('.error')
-        .should('be.visible')
+            .should('be.visible' )
     })
 
     //Exercício 
