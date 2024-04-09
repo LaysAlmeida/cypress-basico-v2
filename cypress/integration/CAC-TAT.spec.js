@@ -100,7 +100,7 @@ describe('Central de Atendimento ao Cliente TAT', function () {
     })
 
     //Exercícios 5
-    it.only('preenche e limpa os campos nome, sobrenome, email e telefone', () => {
+    it('preenche e limpa os campos nome, sobrenome, email e telefone', () => {
         cy.get('#firstName')
             .type('Bruno')
             .should('have.value', 'Bruno')
@@ -138,6 +138,26 @@ describe('Central de Atendimento ao Cliente TAT', function () {
     //Exercício 7
     it('envia o formuário com sucesso usando um comando customizado', () => {
         cy.fillMandatoryFieldsAndSubmit()
+    })
+
+    //Exercício 8
+    it('seleciona um produto (YouTube) por seu texto', () => {
+        cy.get('select#product')
+            .select('YouTube')
+            .should('have.value', 'youtube')
+    })
+
+    //Exercício 9
+    it('seleciona um produto (Mentoria) por seu valor (value)', () => {
+        cy.get('select#product')
+            .select('mentoria')
+            .should('have.value', 'mentoria')
+    })
+
+    it('seleciona um produto (Blog) por seu índice', ()=>{
+        cy.get('select')
+            .select(1)
+            .should('have.value', 'blog')
     })
 
 })
