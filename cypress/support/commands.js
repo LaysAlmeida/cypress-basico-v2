@@ -43,3 +43,27 @@ Cypress.Commands.add('fillMandatoryFieldsAndSubmit', () => {
 
     cy.get('.success').should('be.visible')
 })
+
+Cypress.Commands.add('fillMandatoryFieldsExceptPhoneField', () =>{
+    cy.get('#firstName')
+            .type('Bruno')
+
+        cy.get('#lastName')
+            .type('Gomes')
+
+        cy.get('#email')
+            .type('emailteste@teste.com')
+
+        cy.get('#phone-checkbox')
+            .check()
+            .should('be.checked')
+
+        cy.get('#open-text-area')
+            .type('Lorem ipsum dolor sit amet, ipsum dolor sit amet, ipsum dolor sit amet, ipsum dolor sit amet, ipsum dolor sit amet.', { delay: 0 })
+
+        cy.contains('form .button', 'Enviar')
+            .click()
+
+        cy.get('.error')
+            .should('be.visible')
+})
