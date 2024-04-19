@@ -17,7 +17,7 @@ Aqui será postado todo aprendizado referente ao Curso básico de Cypress do pro
 
  Depois, executar `npx open cypress` para abrir o Cypress pela primeira vez.
 
-## Tests
+## Testes
 É possível executar os testes em dimensões de dispositivos Desktop e Mobile.
 
 ### Desktop
@@ -29,5 +29,5 @@ Ou, execute `npm run cy:open` para abrir o Cypress no modo interativo.
 Execute `npm run test:mobile` para executar o teste no modo headless.
 
 Ou, execute `npm run cy:open:mobile` para abrir o Cypress no modo interativo.
-
+___
 Esse projeto foi criado com 💚 por [Lays Almeida](https://github.com/LaysAlmeida).
