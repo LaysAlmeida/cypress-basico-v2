@@ -158,7 +158,7 @@ describe('Central de Atendimento ao Cliente TAT', function () {
 
     //Exercício 13
     Cypress._.times(5, () => {
-        it.only('marca ambos checkboxes, depois desmarca o último', () => {
+        it('marca ambos checkboxes, depois desmarca o último', () => {
             cy.get('input[type="checkbox"]')
                 .check()
                 .should('be.checked')
@@ -236,7 +236,25 @@ describe('Central de Atendimento ao Cliente TAT', function () {
             .should('not.be.visible')
     })
 
-    it('', ()=>{
-        
+    it.only('exibe e esconde as mensagens de sucesso usando o .invoke()', () => {
+        cy.get('.success')
+            .should('not.be.visible')
+            .invoke('show')
+            .should('be.visible')
+            .and('contain', "Mensagem enviada com sucesso.")
+            .invoke('hide')
+            .should('not.be.visible')
+
+    })
+
+    it.only('exibe e esconde as mensagens de erro usando o .invoke()', () => {
+        cy.get('.error')
+        .should('not.be.visible')
+        .invoke('show')
+        .should('be.visible')
+        .and('contain', "Valide os campos obrigatórios!")
+        .invoke('hide')
+        .should('not.be.visible')
+
     })
 })
