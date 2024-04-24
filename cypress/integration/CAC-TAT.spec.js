@@ -157,12 +157,14 @@ describe('Central de Atendimento ao Cliente TAT', function () {
     })
 
     //Exercício 13
-    it('marca ambos checkboxes, depois desmarca o último', () => {
-        cy.get('input[type="checkbox"]')
-            .check()
-            .should('be.checked')
-            .last()
-            .uncheck()
+    Cypress._.times(5, () => {
+        it.only('marca ambos checkboxes, depois desmarca o último', () => {
+            cy.get('input[type="checkbox"]')
+                .check()
+                .should('be.checked')
+                .last()
+                .uncheck()
+        })
     })
 
     //Exercício 14
@@ -232,5 +234,9 @@ describe('Central de Atendimento ao Cliente TAT', function () {
         cy.tick(3000)
         cy.get('.success')
             .should('not.be.visible')
+    })
+
+    it('', ()=>{
+        
     })
 })
