@@ -217,4 +217,20 @@ describe('Central de Atendimento ao Cliente TAT', function () {
         //cy.contains('CAC TAT - Política de privacidade').should('be.visible')
     })
 
+    it('verifica mensagem de erro e de sucesso', () => {
+        cy.clock()
+        cy.fillMandatoryFieldsExceptPhoneField()
+        cy.tick(3000)
+        cy.get('.error')
+            .should('not.be.visible')
+        cy.get('#phone-checkbox')
+            .uncheck()
+
+        cy.get('.group .field')
+            .clear()
+        cy.fillMandatoryFieldsAndSubmit()
+        cy.tick(3000)
+        cy.get('.success')
+            .should('not.be.visible')
+    })
 })
