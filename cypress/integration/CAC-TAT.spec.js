@@ -212,7 +212,6 @@ describe('Central de Atendimento ao Cliente TAT', function () {
         cy.get('#privacy a')
             .invoke('removeAttr', 'target', '_blank')
             .click()
-
         cy.get('h1').contains('CAC TAT - Política de privacidade')
         //Outros tipos de validação verificando a URL da página clicada
         //cy.url().should('include', 'privacy.html')
@@ -221,18 +220,14 @@ describe('Central de Atendimento ao Cliente TAT', function () {
 
     it('verifica mensagem de erro e de sucesso', () => {
         cy.clock()
-        cy.fillMandatoryFieldsExceptPhoneField()
-        cy.tick(3000)
-        cy.get('.error')
-            .should('not.be.visible')
-        cy.get('#phone-checkbox')
-            .uncheck()
-
-        cy.get('.group .field')
-            .clear()
         cy.fillMandatoryFieldsAndSubmit()
         cy.tick(3000)
         cy.get('.success')
+            .should('not.be.visible')
+        cy.clock()
+        cy.fillMandatoryFieldsExceptPhoneField()
+        cy.tick(3000)
+        cy.get('.error')
             .should('not.be.visible')
     })
 
@@ -244,24 +239,41 @@ describe('Central de Atendimento ao Cliente TAT', function () {
             .and('contain', "Mensagem enviada com sucesso.")
             .invoke('hide')
             .should('not.be.visible')
-
     })
 
     it('exibe e esconde as mensagens de erro usando o .invoke()', () => {
         cy.get('.error')
-        .should('not.be.visible')
-        .invoke('show')
-        .should('be.visible')
-        .and('contain', "Valide os campos obrigatórios!")
-        .invoke('hide')
-        .should('not.be.visible')
-
+            .should('not.be.visible')
+            .invoke('show')
+            .should('be.visible')
+            .and('contain', "Valide os campos obrigatórios!")
+            .invoke('hide')
+            .should('not.be.visible')
     })
 
-    it.only('preenche a area de texto usando o comando invoke', () =>{
+    it('preenche a area de texto usando o comando invoke', () => {
         const text = Cypress._.repeat('Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 5)
         cy.get('textarea')
-            .type(text, {delay: 0.5})
+            .invoke('val', text)
             .should('have.value', text)
+    })
+
+    it('faz uma requisição HTTP', () => {
+        cy.request({
+            method: 'GET',
+            url: 'https://cac-tat.s3.eu-central-1.amazonaws.com/index.html'
+        }).then((response) => {
+            expect(response.status).to.equal(200);
+            expect(response.statusText).to.equal('OK')
+            expect(response.body).to.include('CAC TAT')
+        })
+    })
+
+    it('encontra o gato escondido', () => {
+        cy.get('#cat')
+            .should('be.hidden')
+            .invoke('show')
+            .should('be.visible')
+            .invoke('hide').and('not.be.visible')
     })
 })
